@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BombRoulette.Core
+namespace Bomb_Roulette.Core
 {
     public class GameManager : MonoBehaviour
     {

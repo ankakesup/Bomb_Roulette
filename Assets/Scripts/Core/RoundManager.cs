@@ -1,7 +1,7 @@
 // Assets/Scripts/Core/RoundManager.cs
 using UnityEngine;
 
-namespace BombRoulette.Core
+namespace Bomb_Roulette.Core
 {
     public class RoundManager : MonoBehaviour
     {

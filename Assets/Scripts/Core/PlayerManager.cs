@@ -1,9 +1,9 @@
 // Assets/Scripts/Core/PlayerManager.cs
 using UnityEngine;
 using System.Collections.Generic;
-using BombRoulette.Models;
+using Bomb_Roulette.Models;
 
-namespace BombRoulette.Core
+namespace Bomb_Roulette.Core
 {
     public class PlayerManager : MonoBehaviour
     {

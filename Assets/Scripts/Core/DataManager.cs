@@ -1,7 +1,7 @@
 // Assets/Scripts/Core/DataManager.cs
 using UnityEngine;
 
-namespace BombRoulette.Core
+namespace Bomb_Roulette.Core
 {
     public class DataManager : MonoBehaviour
     {
