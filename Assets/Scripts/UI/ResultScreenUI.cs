@@ -2,12 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Bomb_Roulette.UI
 {
     public class ResultScreenUI : MonoBehaviour
     {
-        public Text resultText;
+        [SerializeField] public TMP_Text resultText;
         public Button restartButton;
 
         void Start()
@@ -22,7 +23,7 @@ namespace Bomb_Roulette.UI
             resultText.text = "ゲームオーバー！\n〇〇が爆発しました。";
         }
 
-        void OnRestartButtonClicked()
+        public void OnRestartButtonClicked()
         {
             SceneManager.LoadScene("TitleScene");
         }
