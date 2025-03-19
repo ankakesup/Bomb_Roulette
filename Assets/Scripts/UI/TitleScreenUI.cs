@@ -26,7 +26,7 @@ namespace Bomb_Roulette.UI
             GameManager.Instance.StartGame();
         }
 
-        void OnOperationsButtonClicked()
+        public void OnOperationsButtonClicked()
         {
             operationsPanel.SetActive(!operationsPanel.activeSelf);
         }
