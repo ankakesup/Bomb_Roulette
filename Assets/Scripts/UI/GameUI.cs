@@ -1,14 +1,16 @@
 // Assets/Scripts/UI/GameUI.cs
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Bomb_Roulette.UI
 {
     public class GameUI : MonoBehaviour
     {
         public static GameUI Instance;
-        public Text turnDisplayText;
-        public Text timerText;
+        [SerializeField] public TMP_Text turnDisplayText;
+        [SerializeField] public TMP_Text timerText;
+        public Button operationsButton;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
 
         void Awake()
@@ -31,6 +33,11 @@ namespace Bomb_Roulette.UI
         public void UpdateTimerDisplay(float timeRemaining)
         {
             timerText.text = "残り時間: " + timeRemaining.ToString("F1");
+        }
+
+        public void OnOperationsButtonClicked()
+        {
+            operationsPanel.SetActive(!operationsPanel.activeSelf);
         }
     }
 }
