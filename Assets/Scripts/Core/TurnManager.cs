@@ -7,31 +7,35 @@ namespace Bomb_Roulette.Core
 {
     public class TurnManager : MonoBehaviour
     {
-        public List<Player> players = new List<Player>();
-        private int currentTurnIndex = 0;
+        private int currentTurn = 0;
+        private int numPlayers = 0;
 
-        public void InitializeTurns(List<Player> playerList)
+        public void GetNumPlayers(int numPlayersTemp) // TitleScreenUI からプレイヤーの人数を取得する
         {
-            players = playerList;
-            currentTurnIndex = 0;
+            numPlayers = numPlayersTemp;
             UpdateTurnUI();
         }
 
-        public Player GetCurrentPlayer()
+        public void NextTurn() // 次のターンにする関数
         {
-            return players[currentTurnIndex];
-        }
-
-        public void NextTurn()
-        {
-            currentTurnIndex = (currentTurnIndex + 1) % players.Count;
+            currentTurn++;
+            if (currentTurn == numPlayers) // 全員のターンが終わったらラウンドを更新する
+            {
+                RoundManager roundManager = new RoundManager();
+                roundManager.NextRound();
+                currentTurn = 0;
+            }
             UpdateTurnUI();
         }
 
-        void UpdateTurnUI()
+        void UpdateTurnUI() // ターンの変更時にUIを更新する関数
         {
             // UIの更新例。GameUI.Instance.UpdateTurnDisplay などを呼び出す
-            Debug.Log("現在のターン: " + GetCurrentPlayer().playerName);
+            Debug.Log("Turn: Player" + (currentTurn + 1) );
+
+            GameObject gameObject = new GameObject("Bomb_Roulette.UI.GameUI");
+            Bomb_Roulette.UI.GameUI gameUI = gameObject.AddComponent<Bomb_Roulette.UI.GameUI>();
+            gameUI.UpdateTurnDisplay(currentTurn + 1);
         }
     }
 }

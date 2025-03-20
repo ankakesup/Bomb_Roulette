@@ -22,8 +22,11 @@ namespace Bomb_Roulette.UI
 
         void OnStartButtonClicked()
         {
-            int playerCount = playerCountDropdown.value + 2;
             GameManager.Instance.StartGame();
+            
+            GameObject gameObject = new GameObject("Bomb_Roulette.Core.TurnManager");
+            Bomb_Roulette.Core.TurnManager turnManager = gameObject.AddComponent<Bomb_Roulette.Core.TurnManager>();
+            turnManager.GetNumPlayers(playerCountDropdown.value + 2);
         }
 
         public void OnOperationsButtonClicked()

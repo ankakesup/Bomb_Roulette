@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using Bomb_Roulette.Models;
 
+// ‚±‚ÌƒNƒ‰ƒXŒ»óg‚í‚È‚¢
+
 namespace Bomb_Roulette.Core
 {
     public class PlayerManager : MonoBehaviour

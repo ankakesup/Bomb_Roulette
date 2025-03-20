@@ -20,20 +20,5 @@ namespace Bomb_Roulette.Core
                 Destroy(gameObject);
             }
         }
-
-        public void SaveData()
-        {
-            // 例：PlayerPrefs を利用してデータを保存
-            PlayerPrefs.SetInt("HighScore", highScore);
-            PlayerPrefs.Save();
-        }
-
-        public void LoadData()
-        {
-            if (PlayerPrefs.HasKey("HighScore"))
-            {
-                highScore = PlayerPrefs.GetInt("HighScore");
-            }
-        }
     }
 }
