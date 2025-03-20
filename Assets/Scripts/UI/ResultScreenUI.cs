@@ -20,7 +20,7 @@ namespace Bomb_Roulette.UI
         void ShowResult()
         {
             // 例として、GameManager等から結果を取得して表示
-            resultText.text = "ゲームオーバー！\n〇〇が爆発しました。";
+            resultText.text = "Game Over !!";
         }
 
         public void OnRestartButtonClicked()

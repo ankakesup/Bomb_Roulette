@@ -16,30 +16,7 @@ namespace Bomb_Roulette.UI
         public Button TempButton;
         public Button TempButtonTurn;
 
-        void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        void Start()
-        {
-            if (operationsPanel != null)
-            {
-                operationsPanel.SetActive(false);
-            }
-            else
-            {
-                Debug.LogError("operationsPanelがnullです。Inspectorでの設定を確認してください。");
-            }
-        }
-
+        
         public void UpdateTurnDisplay(int numPlayer)
         {
             if (turnDisplayText != null)
@@ -61,7 +38,7 @@ namespace Bomb_Roulette.UI
         {
             operationsPanel.SetActive(!operationsPanel.activeSelf);
         }
-
+        
 
         public void TempButtonClicked() // デバッグ用のrerult画面起動用関数
         {
