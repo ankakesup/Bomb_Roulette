@@ -1,6 +1,7 @@
 // Assets/Scripts/UI/GameUI.cs
 using UnityEngine;
 using UnityEngine.UI;
+using Bomb_Roulette.Core;
 using TMPro;
 
 namespace Bomb_Roulette.UI
@@ -12,6 +13,7 @@ namespace Bomb_Roulette.UI
         [SerializeField] public TMP_Text timerText;
         public Button operationsButton;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
+        public Button TempButton;
 
         void Awake()
         {
@@ -23,6 +25,11 @@ namespace Bomb_Roulette.UI
             {
                 Destroy(gameObject);
             }
+        }
+
+        void Start()
+        {
+            operationsPanel.SetActive(false);
         }
 
         public void UpdateTurnDisplay(string playerName)
@@ -38,6 +45,12 @@ namespace Bomb_Roulette.UI
         public void OnOperationsButtonClicked()
         {
             operationsPanel.SetActive(!operationsPanel.activeSelf);
+        }
+
+
+        public void TempButtonClicked() // 開発中のrerult画面起動用関数
+        {
+            GameManager.Instance.EndGame();
         }
     }
 }
