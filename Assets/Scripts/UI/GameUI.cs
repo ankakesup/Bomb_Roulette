@@ -27,6 +27,11 @@ namespace Bomb_Roulette.UI
             }
         }
 
+        void Start()
+        {
+            operationsPanel.SetActive(false);
+        }
+
         public void UpdateTurnDisplay(string playerName)
         {
             turnDisplayText.text = "åªç›ÇÃÉ^Å[Éì: " + playerName;
