@@ -29,18 +29,19 @@ namespace Bomb_Roulette.Core
 
         public void LoadTitleScene()
         {
+            // タイトル画面の呼び出し
             SceneManager.LoadScene("TitleScene");
         }
 
         public void StartGame()
         {
-            // ゲーム開始前の初期化処理など
+            // ゲーム画面の呼び出し
             SceneManager.LoadScene("GameScene");
         }
 
         public void EndGame()
         {
-            // ゲーム終了後、リザルト画面へ
+            // リザルト画面の呼び出し
             SceneManager.LoadScene("ResultScene");
         }
     }

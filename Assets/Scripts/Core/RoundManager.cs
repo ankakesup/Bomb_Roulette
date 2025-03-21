@@ -5,8 +5,8 @@ namespace Bomb_Roulette.Core
 {
     public class RoundManager : MonoBehaviour
     {
-        private int currentRound = 1;
-        private int maxInitialRounds = 3;
+        private int currentRound = 1; // 現在のラウンドの管理
+        private int maxInitialRounds = 3; // 通常ラウンドを行う最大数
 
         public void NextRound() // 次のラウンドにする関数
         {
@@ -18,15 +18,15 @@ namespace Bomb_Roulette.Core
             }
             else
             {
-                // 通常ラウンド用の処理（例：導火線本数の更新など）
+                // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
             }
-            Debug.Log("Round: " + currentRound);
+            Debug.Log("Round: " + currentRound); // デバッグログの出力
         }
 
         void ActivateSuddenDeath()
         {
             // サドンデスラウンドのルール適用
-            Debug.Log("Start Sudden Death Round!!");
+            Debug.Log("Start Sudden Death Round!!"); // デバッグログの出力
         }
     }
 }

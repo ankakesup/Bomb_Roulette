@@ -17,6 +17,12 @@ namespace Bomb_Roulette.UI
         public Button TempButtonTurn;
 
         
+        public void start()
+        {
+            UpdateTurnDisplay(1); // UIの更新を行う
+            Debug.Log("Game Start"); // デバッグログの出力
+        }
+
         public void UpdateTurnDisplay(int numPlayer)
         {
             if (turnDisplayText != null)
