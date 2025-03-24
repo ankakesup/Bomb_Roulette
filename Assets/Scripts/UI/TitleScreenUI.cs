@@ -22,11 +22,16 @@ namespace Bomb_Roulette.UI
 
         void OnStartButtonClicked()
         {
+            if (TurnManager.Instance != null)
+            {
+                TurnManager.Instance.SetNumPlayers(playerCountDropdown.value + 2);
+            }
+            else
+            {
+                Debug.LogError("TurnManager のインスタンスが見つかりません。シーンに配置されていることを確認してください。");
+            }
+
             GameManager.Instance.StartGame();
-            
-            GameObject gameObject = new GameObject("Bomb_Roulette.Core.TurnManager");
-            Bomb_Roulette.Core.TurnManager turnManager = gameObject.AddComponent<Bomb_Roulette.Core.TurnManager>();
-            turnManager.SetNumPlayers(playerCountDropdown.value + 2);
         }
 
         public void OnOperationsButtonClicked()

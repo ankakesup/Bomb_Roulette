@@ -49,6 +49,7 @@ namespace Bomb_Roulette.Core
                 currentTurn = 0; // ラウンドのはじめにcurrentTurnを0にリセットする
             }
             UpdateTurnUI(); // UIの更新
+            Debug.Log(numPlayers);
         }
 
         void UpdateTurnUI()
