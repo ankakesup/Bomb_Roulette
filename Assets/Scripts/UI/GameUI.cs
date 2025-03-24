@@ -9,18 +9,27 @@ namespace Bomb_Roulette.UI
     public class GameUI : MonoBehaviour
     {
         public static GameUI Instance;
-        [SerializeField] public TMP_Text turnDisplayText;
-        [SerializeField] public TMP_Text timerText;
+        public TextMeshProUGUI turnDisplayText;
+        public TextMeshProUGUI timerText;
         public Button operationsButton;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
         public Button TempButton;
         public Button TempButtonTurn;
 
-        
-        public void start()
+
+        private void Awake()
         {
-            UpdateTurnDisplay(1); // UIの更新を行う
-            Debug.Log("Game Start"); // デバッグログの出力
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+            UpdateTurnDisplay(1);
+            Debug.Log("Game Start");
         }
 
         public void UpdateTurnDisplay(int numPlayer)
@@ -51,10 +60,17 @@ namespace Bomb_Roulette.UI
             GameManager.Instance.EndGame();
         }
 
-        public void TempButtonTurnClicked() // デバッグ用のrerult画面起動用関数
+        public void TempButtonTurnClicked()
         {
-            Bomb_Roulette.Core.TurnManager turnManager = new Bomb_Roulette.Core.TurnManager();
-            turnManager.NextTurn();
+            if (TurnManager.Instance != null)
+            {
+                TurnManager.Instance.NextTurn();
+            }
+            else
+            {
+                Debug.LogError("TurnManager のインスタンスが見つかりません。シーンに配置されているか確認してください。");
+            }
         }
+
     }
 }
