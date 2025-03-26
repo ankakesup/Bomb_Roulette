@@ -42,8 +42,7 @@ namespace Bomb_Roulette.Core
             if (currentTurn == numPlayers) // 全員のターンが終わったらラウンドを更新する
             {
                 // 次のaまでのコードで RoundManager の NextRound関数 の呼び出しを行う
-                GameObject gameObjectRound = new GameObject("Bomb_Roulette.Core.RoundManager");
-                Bomb_Roulette.Core.RoundManager roundManager = gameObjectRound.AddComponent<Bomb_Roulette.Core.RoundManager>();
+                RoundManager roundManager = FindObjectOfType<RoundManager>();
                 roundManager.NextRound();
                 // a
                 currentTurn = 0; // ラウンドのはじめにcurrentTurnを0にリセットする
