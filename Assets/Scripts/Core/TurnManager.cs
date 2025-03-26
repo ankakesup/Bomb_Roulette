@@ -1,4 +1,4 @@
-// Assets/Scripts/Core/TurnManager.cs
+ï»¿// Assets/Scripts/Core/TurnManager.cs
 using UnityEngine;
 using System.Collections.Generic;
 using Bomb_Roulette.Models;
@@ -9,8 +9,9 @@ namespace Bomb_Roulette.Core
     public class TurnManager : MonoBehaviour
     {
         public static TurnManager Instance;
-        private int currentTurn = 0; // Œ»İ‚Ìƒ^[ƒ“(Nƒ^[ƒ“–Ú‚É‘Î‚µ‚ÄCN-1‚Ì’l‚ğæ‚é)
-        private int numPlayers = 0; // ƒvƒŒƒCƒ„[‚Ìl”‚ÌŠÇ—
+        private int currentTurn = 0; // ç¾åœ¨ã®ã‚¿ãƒ¼ãƒ³(Nã‚¿ãƒ¼ãƒ³ç›®ã«å¯¾ã—ã¦ï¼ŒN-1ã®å€¤ã‚’å–ã‚‹)
+        private int numPlayers = 0; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®äººæ•°ã®ç®¡ç†
+        private int explodedPlayer = -1; // çˆ†ç™ºã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç•ªå·ï¼ˆåˆæœŸå€¤-1ï¼‰
 
         private void Awake()
         {
@@ -25,29 +26,58 @@ namespace Bomb_Roulette.Core
             }
         }
 
-        public void SetNumPlayers(int numPlayersTemp) // TitleScreenUI ‚©‚çƒvƒŒƒCƒ„[‚Ìl”‚ğæ“¾‚·‚éŠÖ”
+        public void ResetTurn()
+        {
+            currentTurn = 0;
+            explodedPlayer = -1;
+        }
+
+
+
+        public void SetNumPlayers(int numPlayersTemp) // TitleScreenUI ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®äººæ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•°
         {
             numPlayers = numPlayersTemp;
 
         }
 
-        public int GetNumPlayers() // numPlayers ‚Ì’l‚ğ•Ô‚·ŠÖ”
+        public int GetNumPlayers() // numPlayers ã®å€¤ã‚’è¿”ã™é–¢æ•°
         {
             return numPlayers;
         }
 
-        public void NextTurn() // Ÿ‚Ìƒ^[ƒ“‚É‚·‚éŠÖ”
+        public bool CheckForExplosion()
         {
-            currentTurn = currentTurn + 1;
-            if (currentTurn == numPlayers) // ‘Sˆõ‚Ìƒ^[ƒ“‚ªI‚í‚Á‚½‚çƒ‰ƒEƒ“ƒh‚ğXV‚·‚é
+            float explosionProbability = 1f / (numPlayers - currentTurn + 1);
+
+            Debug.Log($"Player {currentTurn + 1} ã®çˆ†ç™ºç¢ºç‡: {explosionProbability * 100}%");
+
+            if (Random.value < explosionProbability) // 0.0 ã€œ 1.0 ã®ç¯„å›²ã§ãƒ©ãƒ³ãƒ€ãƒ å€¤ã‚’ç”Ÿæˆ
             {
-                // Ÿ‚Ìa‚Ü‚Å‚ÌƒR[ƒh‚Å RoundManager ‚Ì NextRoundŠÖ” ‚ÌŒÄ‚Ño‚µ‚ğs‚¤
+                BombExploded();
+                return true; // çˆ†ç™ºã—ãŸã“ã¨ã‚’ç¤ºã™
+            }
+
+            return false;
+        }
+
+
+        public void NextTurn() // æ¬¡ã®ã‚¿ãƒ¼ãƒ³ã«ã™ã‚‹é–¢æ•°
+        {
+            // ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒçˆ†ç™ºã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
+            if (CheckForExplosion())
+            {
+                return; // çˆ†ç™ºã—ãŸã‚‰ã‚²ãƒ¼ãƒ çµ‚äº†ã™ã‚‹ã®ã§ã€æ¬¡ã®ã‚¿ãƒ¼ãƒ³ã¸é€²ã¾ãªã„
+            }
+            currentTurn = currentTurn + 1;
+            if (currentTurn == numPlayers) // å…¨å“¡ã®ã‚¿ãƒ¼ãƒ³ãŒçµ‚ã‚ã£ãŸã‚‰ãƒ©ã‚¦ãƒ³ãƒ‰ã‚’æ›´æ–°ã™ã‚‹
+            {
+                // æ¬¡ã®aã¾ã§ã®ã‚³ãƒ¼ãƒ‰ã§ RoundManager ã® NextRoundé–¢æ•° ã®å‘¼ã³å‡ºã—ã‚’è¡Œã†
                 RoundManager roundManager = FindObjectOfType<RoundManager>();
                 roundManager.NextRound();
                 // a
-                currentTurn = 0; // ƒ‰ƒEƒ“ƒh‚Ì‚Í‚¶‚ß‚ÉcurrentTurn‚ğ0‚ÉƒŠƒZƒbƒg‚·‚é
+                currentTurn = 0; // ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã¯ã˜ã‚ã«currentTurnã‚’0ã«ãƒªã‚»ãƒƒãƒˆã™ã‚‹
             }
-            UpdateTurnUI(); // UI‚ÌXV
+            UpdateTurnUI(); // UIã®æ›´æ–°
             Debug.Log(numPlayers);
         }
 
@@ -61,9 +91,19 @@ namespace Bomb_Roulette.Core
             }
             else
             {
-                Debug.LogError("GameUI ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBƒV[ƒ“‚É”z’u‚³‚ê‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B");
+                Debug.LogError("GameUI ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã‚·ãƒ¼ãƒ³ã«é…ç½®ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
             }
         }
 
+        public void BombExploded()
+        {
+            explodedPlayer = currentTurn; // çˆ†ç™ºã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨˜éŒ²
+            GameManager.Instance.EndGame(); // çµæœç”»é¢ã¸ç§»è¡Œ
+        }
+
+        public int GetExplodedPlayer()
+        {
+            return explodedPlayer;
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace Bomb_Roulette.Core
 
         public void StartGame()
         {
+            TurnManager.Instance.ResetTurn();
             // ƒQ[ƒ€‰æ–Ê‚ÌŒÄ‚Ño‚µ
             SceneManager.LoadScene("GameScene");
         }
