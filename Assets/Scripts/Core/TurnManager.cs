@@ -48,6 +48,7 @@ namespace Bomb_Roulette.Core
         public bool CheckForExplosion()
         {
             float explosionProbability = 1f / (numPlayers - currentTurn + 1);
+            float fakeExplosionProbability = 0.05f; // 5% の確率でフェイク爆発
 
             Debug.Log($"Player {currentTurn + 1} の爆発確率: {explosionProbability * 100}%");
 
@@ -56,18 +57,28 @@ namespace Bomb_Roulette.Core
                 BombExploded();
                 return true; // 爆発したことを示す
             }
+            else if (Random.value < fakeExplosionProbability)
+            {
+                Debug.Log($"Player {currentTurn + 1} はfake爆破を起こした");
+                //フェイク爆破の演出を入れる↓
 
-            return false;
+                return false;
+            }
+
+                return false;
         }
 
 
         public void NextTurn() // 次のターンにする関数
         {
+            //-------後に導火線を決定したタイミングで実行するように変更する--------------------
             // 現在のプレイヤーが爆発するかチェック
             if (CheckForExplosion())
             {
                 return; // 爆発したらゲーム終了するので、次のターンへ進まない
             }
+            //--------------------------------------------------------------------------
+
             currentTurn = currentTurn + 1;
             if (currentTurn == numPlayers) // 全員のターンが終わったらラウンドを更新する
             {
