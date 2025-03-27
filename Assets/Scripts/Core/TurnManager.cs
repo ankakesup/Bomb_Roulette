@@ -47,8 +47,19 @@ namespace Bomb_Roulette.Core
 
         public bool CheckForExplosion()
         {
-            float explosionProbability = 1f / (numPlayers - currentTurn + 1);
+            RoundManager roundManager = FindObjectOfType<RoundManager>();
+            bool isSuddenDeath = roundManager.IsSuddenDeath();
+            float explosionProbability;     //爆破確率
             float fakeExplosionProbability = 0.05f; // 5% の確率でフェイク爆発
+
+            if (isSuddenDeath)
+            {
+                explosionProbability = 1f / (numPlayers - currentTurn);
+            }
+            else
+            {
+                explosionProbability = 1f / (numPlayers - currentTurn + 1);
+            }
 
             Debug.Log($"Player {currentTurn + 1} の爆発確率: {explosionProbability * 100}%");
 

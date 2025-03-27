@@ -36,6 +36,8 @@ namespace Bomb_Roulette.Core
         public void StartGame()
         {
             TurnManager.Instance.ResetTurn();
+            RoundManager roundManager = FindObjectOfType<RoundManager>();
+            roundManager.ResetRound();
             // ƒQ[ƒ€‰æ–Ê‚ÌŒÄ‚Ño‚µ
             SceneManager.LoadScene("GameScene");
         }
