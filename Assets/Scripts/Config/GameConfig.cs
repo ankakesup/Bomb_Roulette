@@ -8,5 +8,6 @@ namespace Bomb_Roulette.Config
         public const int INITIAL_ROUNDS = 3;
         public const float FAKE_EXPLOSION_CHANCE = 0.1f; // 10% の確率
         // その他、導火線本数や爆発確率などの定数を定義
+
     }
 }

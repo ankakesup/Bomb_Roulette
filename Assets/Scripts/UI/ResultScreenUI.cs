@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Bomb_Roulette.Core;
 using TMPro;
 
 namespace Bomb_Roulette.UI
@@ -19,8 +20,8 @@ namespace Bomb_Roulette.UI
 
         void ShowResult()
         {
-            // —á‚Æ‚µ‚ÄAGameManager“™‚©‚çŒ‹‰Ê‚ğæ“¾‚µ‚Ä•\¦
-            resultText.text = "Game Over !!";
+            int explodedPlayer = TurnManager.Instance.GetExplodedPlayer();
+            resultText.text = "Player " + (explodedPlayer + 1) + " exploded!";
         }
 
         public void OnRestartButtonClicked()
