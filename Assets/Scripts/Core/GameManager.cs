@@ -1,6 +1,8 @@
 // Assets/Scripts/Core/GameManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Bomb_Roulette.Models;
+
 
 namespace Bomb_Roulette.Core
 {
@@ -40,6 +42,28 @@ namespace Bomb_Roulette.Core
             roundManager.ResetRound();
             // ゲーム画面の呼び出し
             SceneManager.LoadScene("GameScene");
+            // シーンが読み込まれた後に処理を実行
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+
+        // シーンが読み込まれた後に呼ばれるコールバック
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // シーンがロードされた後に Fuse を生成
+            Fuse fuse = FindObjectOfType<Fuse>();
+            if (fuse != null)
+            {
+                int numPlayers = TurnManager.Instance.GetNumPlayers();
+                fuse.GenerateFuses(numPlayers + 1);
+            }
+            else
+            {
+                Debug.LogError("Fuseオブジェクトがシーン内に見つかりません");
+            }
+
+            // イベントリスナーの解除
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void EndGame()

@@ -50,7 +50,7 @@ namespace Bomb_Roulette.Core
             RoundManager roundManager = FindObjectOfType<RoundManager>();
             bool isSuddenDeath = roundManager.IsSuddenDeath();
             float explosionProbability;     //爆破確率
-            float fakeExplosionProbability = 0.05f; // 5% の確率でフェイク爆発
+            float fakeExplosionProbability = 0.1f; // 10% の確率でフェイク爆発
 
             if (isSuddenDeath)
             {
