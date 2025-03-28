@@ -1,5 +1,6 @@
 // Assets/Scripts/Core/RoundManager.cs
 using UnityEngine;
+using Bomb_Roulette.Models;
 
 namespace Bomb_Roulette.Core
 {
@@ -8,6 +9,7 @@ namespace Bomb_Roulette.Core
         private int currentRound = 1; // 現在のラウンドの管理
         private int maxInitialRounds = 3; // 通常ラウンドを行う最大数
         private bool isSuddenDeath = false;
+
 
         public void ResetRound()
         {
@@ -26,6 +28,11 @@ namespace Bomb_Roulette.Core
             else
             {
                 // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
+
+                Fuse fuse = FindObjectOfType<Fuse>();
+                int numPlayers = TurnManager.Instance.GetNumPlayers();
+
+                fuse.GenerateFuses(numPlayers + 1);
             }
             Debug.Log("Round: " + currentRound); // デバッグログの出力
         }
