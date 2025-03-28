@@ -6,10 +6,23 @@ namespace Bomb_Roulette.Core
 {
     public class RoundManager : MonoBehaviour
     {
+        public static RoundManager Instance;
         private int currentRound = 1; // 現在のラウンドの管理
         private int maxInitialRounds = 3; // 通常ラウンドを行う最大数
         private bool isSuddenDeath = false;
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
 
         public void ResetRound()
         {
