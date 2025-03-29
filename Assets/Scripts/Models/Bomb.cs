@@ -14,11 +14,13 @@ namespace Bomb_Roulette.Models
         public Sprite realExplosionSprite; // 本物の爆発
         
         private Image bombImage;
+        private RectTransform bombRectTransform;
 
         void Start()
         {
             // このゲームオブジェクトにアタッチされているImageコンポーネントを取得
             bombImage = GetComponent<Image>();
+            bombRectTransform = GetComponent<RectTransform>();
 
             // 初期状態で通常の爆弾画像を設定
             SetNormalBomb();
@@ -43,7 +45,9 @@ namespace Bomb_Roulette.Models
         // 一定時間後に通常の爆弾画像に戻すCoroutine
         private IEnumerator ReturnToNormalBomb(float delay)
         {
+            yield return StartCoroutine(ScaleUpBomb(0.5f)); // フェイク爆発の間に画像を拡大
             yield return new WaitForSeconds(delay);  // 指定した秒数だけ待機
+            yield return StartCoroutine(ScaleDownBomb(0.5f)); // フェイク爆発の間に画像を拡大
             SetNormalBomb();  // 通常の爆弾画像に戻す
         }
 
@@ -59,6 +63,8 @@ namespace Bomb_Roulette.Models
             // フェイク爆発画像に変更
             bombImage.sprite = fakeExplosionSprite;
 
+            yield return StartCoroutine(ScaleUpBomb(0.5f)); // フェイク爆発の間に画像を拡大
+
             // フェイク爆発を一定時間表示
             yield return new WaitForSeconds(0.5f); // 0.5秒間待機
 
@@ -69,6 +75,44 @@ namespace Bomb_Roulette.Models
             yield return new WaitForSeconds(0.5f); // 0.5秒間待機
 
         }
+
+        // 爆弾画像を拡大するコルーチン
+        private IEnumerator ScaleUpBomb(float duration)
+        {
+            Vector3 originalScale = bombRectTransform.localScale; // 元のサイズ
+            Vector3 targetScale = originalScale * 5f; // 目標のサイズ（2倍）
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                bombRectTransform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            bombRectTransform.localScale = targetScale; // 最終的に目標サイズに設定
+        }
+
+
+        // 画像を元のサイズに戻すCoroutine
+        private IEnumerator ScaleDownBomb(float duration)
+        {
+            Vector3 originalScale = bombRectTransform.localScale; // 現在のサイズ
+            Vector3 targetScale = originalScale / 5f; // 元のサイズに戻す（2倍に拡大したため、半分に戻す）
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                bombRectTransform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            bombRectTransform.localScale = targetScale; // 最終的に元のサイズに戻す
+        }
+
 
         public bool isExploded = false;
 
