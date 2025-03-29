@@ -47,8 +47,7 @@ namespace Bomb_Roulette.Core
 
         public bool CheckForExplosion()
         {
-            RoundManager roundManager = FindObjectOfType<RoundManager>();
-            bool isSuddenDeath = roundManager.IsSuddenDeath();
+            bool isSuddenDeath = RoundManager.Instance.IsSuddenDeath();
             float explosionProbability;     //爆破確率
             float fakeExplosionProbability = 0.1f; // 10% の確率でフェイク爆発
 
@@ -94,8 +93,7 @@ namespace Bomb_Roulette.Core
             if (currentTurn == numPlayers) // 全員のターンが終わったらラウンドを更新する
             {
                 // 次のaまでのコードで RoundManager の NextRound関数 の呼び出しを行う
-                RoundManager roundManager = FindObjectOfType<RoundManager>();
-                roundManager.NextRound();
+                RoundManager.Instance.NextRound();
                 // a
                 currentTurn = 0; // ラウンドのはじめにcurrentTurnを0にリセットする
             }

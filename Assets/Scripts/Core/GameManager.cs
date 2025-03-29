@@ -37,10 +37,10 @@ namespace Bomb_Roulette.Core
 
         public void StartGame()
         {
-            TurnManager.Instance.ResetTurn();
-            RoundManager.Instance.ResetRound();
             // ゲーム画面の呼び出し
             SceneManager.LoadScene("GameScene");
+
+            RoundManager.Instance.ResetRound();
             // シーンが読み込まれた後に処理を実行
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -50,17 +50,9 @@ namespace Bomb_Roulette.Core
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // シーンがロードされた後に Fuse を生成
-            Fuse fuse = FindObjectOfType<Fuse>();
-            if (fuse != null)
-            {
-                int numPlayers = TurnManager.Instance.GetNumPlayers();
-                fuse.GenerateFuses(numPlayers + 1);
-            }
-            else
-            {
-                Debug.LogError("Fuseオブジェクトがシーン内に見つかりません");
-            }
-
+            int numPlayers = TurnManager.Instance.GetNumPlayers();
+            Fuse.Instance.GenerateFuses(numPlayers + 1);
+            
             // イベントリスナーの解除
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }

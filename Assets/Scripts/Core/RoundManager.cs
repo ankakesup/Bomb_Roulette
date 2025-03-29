@@ -28,6 +28,7 @@ namespace Bomb_Roulette.Core
         {
             currentRound = 1;
             isSuddenDeath = false; // サドンデス状態をリセット
+            TurnManager.Instance.ResetTurn();
         }
 
         public void NextRound() // 次のラウンドにする関数
@@ -37,15 +38,15 @@ namespace Bomb_Roulette.Core
             if (currentRound > maxInitialRounds) // 4ラウンド目に入ったら，サドンデスにする
             {
                 ActivateSuddenDeath();
+                int numPlayers = TurnManager.Instance.GetNumPlayers();
+                Fuse.Instance.GenerateFuses(numPlayers + 1);
             }
             else
             {
                 // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
 
-                Fuse fuse = FindObjectOfType<Fuse>();
                 int numPlayers = TurnManager.Instance.GetNumPlayers();
-
-                fuse.GenerateFuses(numPlayers + 1);
+                Fuse.Instance.GenerateFuses(numPlayers + 1);
             }
             Debug.Log("Round: " + currentRound); // デバッグログの出力
         }
