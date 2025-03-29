@@ -4,102 +4,102 @@ using System.Collections.Generic;
 
 namespace Bomb_Roulette.Models
 {
-    public class Fuse : MonoBehaviour
+    public class FuseManager : MonoBehaviour
     {
         // シングルトンインスタンス
-        public static Fuse Instance;
+        public static FuseManager Instance;
 
-        // InspectorでFuseのプレハブと親オブジェクトをセット
+        // Inspector で設定するプレハブと親オブジェクト
         public GameObject fusePrefab;
         public Transform fuseParent;
 
-        // Fuseを配列で管理
-        private Fuse[] fuseArray;
+        // 生成された FuseItem を管理する配列
+        private FuseItem[] fuseArray;
 
         private void Awake()
         {
-            // シングルトンのセットアップ
+            // シングルトン初期化
             if (Instance == null)
             {
                 Instance = this;
             }
             else
             {
-                Destroy(gameObject); // 既にインスタンスが存在する場合は破棄
+                Destroy(gameObject);
                 return;
             }
         }
 
         /// <summary>
-        /// 指定した数のFuseを生成する（既存のFuseは削除）。
+        /// 指定した数の Fuse を生成する（既存の Fuse は削除）。
         /// </summary>
         public void GenerateFuses(int numFuses)
         {
-            RemoveAllFuses(); // 既存のFuseを全削除
-            fuseArray = new Fuse[numFuses];
+            RemoveAllFuses(); // 既存の Fuse を全削除
+            fuseArray = new FuseItem[numFuses];
 
             float spacing = 100f; // 配置間隔
             Vector2 startPosition = new Vector2(-spacing * (numFuses - 1) / 2, 0);
 
             for (int i = 0; i < numFuses; i++)
             {
+                // 各 Fuse の位置を計算
                 Vector2 position = startPosition + new Vector2(i * spacing, 0);
 
+                // Fuse プレハブを生成し、親に配置
                 GameObject fuseObj = Instantiate(fusePrefab, fuseParent);
                 fuseObj.GetComponent<RectTransform>().anchoredPosition = position;
 
-                Fuse fuse = fuseObj.GetComponent<Fuse>();
-                fuseArray[i] = fuse;
+                // FuseItem コンポーネントを取得して配列に格納
+                FuseItem fuseItem = fuseObj.GetComponent<FuseItem>();
+                fuseArray[i] = fuseItem;
+                // インデックスを設定（必要に応じて FuseItem 内で利用可能）
+                fuseItem.SetIndex(i);
 
-                // EventTriggerを追加してクリックイベントを設定
+                // EventTrigger を追加し、クリックイベントで Fuse を削除するように設定
                 EventTrigger trigger = fuseObj.GetComponent<EventTrigger>() ?? fuseObj.AddComponent<EventTrigger>();
-                int index = i;
+                int index = i; // ローカル変数でキャプチャ
                 EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
                 entry.callback.AddListener((data) => { OnFuseClicked(index); });
                 trigger.triggers.Add(entry);
             }
 
-            for (int i = 0; i < 3; i++)
+            // 確認用ログ（各 FuseItem の参照が入っているか出力）
+            for (int i = 0; i < numFuses; i++)
             {
                 Debug.Log(fuseArray[i]);
             }
         }
 
         /// <summary>
-        /// Fuseがクリックされた時の処理（指定インデックスのFuseを削除）。
+        /// Fuse がクリックされたときの処理（指定インデックスの Fuse を削除）。
         /// </summary>
         private void OnFuseClicked(int index)
         {
-            Debug.Log($"Fuse clicked at index {index} and will be removed.");
+            Debug.Log($"Fuse clicked at index {index}. Removing...");
             RemoveFuse(index);
         }
 
         /// <summary>
-        /// 指定されたインデックスのFuseを削除する。
+        /// 指定したインデックスの Fuse を削除する。
         /// </summary>
         public void RemoveFuse(int index)
         {
-            if (fuseArray[index] == null)
-            {
-                Debug.Log("Null");
-            }
-
             if (fuseArray != null && index >= 0 && index < fuseArray.Length && fuseArray[index] != null)
             {
-                GameObject fuseObj = fuseArray[index].gameObject; // 削除対象のGameObjectを取得
-                Destroy(fuseObj);  // GameObjectを削除
-                fuseArray[index] = null; // 配列の参照をクリア
+                Destroy(fuseArray[index].gameObject);
+                fuseArray[index] = null;
             }
         }
 
         /// <summary>
-        /// すべてのFuseを削除する。
+        /// 生成されたすべての Fuse を削除する。
         /// </summary>
         public void RemoveAllFuses()
         {
             if (fuseArray != null)
             {
-                foreach (Fuse fuse in fuseArray)
+                foreach (FuseItem fuse in fuseArray)
                 {
                     if (fuse != null)
                     {
@@ -109,7 +109,7 @@ namespace Bomb_Roulette.Models
                 fuseArray = null;
             }
 
-            // fuseParent内の子オブジェクトも全削除
+            // fuseParent 配下の子オブジェクトも全削除（必要な場合）
             foreach (Transform child in fuseParent)
             {
                 Destroy(child.gameObject);

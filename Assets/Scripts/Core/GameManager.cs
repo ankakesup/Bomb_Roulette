@@ -51,7 +51,7 @@ namespace Bomb_Roulette.Core
         {
             // シーンがロードされた後に Fuse を生成
             int numPlayers = TurnManager.Instance.GetNumPlayers();
-            Fuse.Instance.GenerateFuses(numPlayers + 1);
+            FuseManager.Instance.GenerateFuses(numPlayers + 1);
             
             // イベントリスナーの解除
             SceneManager.sceneLoaded -= OnSceneLoaded;
