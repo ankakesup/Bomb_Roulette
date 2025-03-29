@@ -81,14 +81,6 @@ namespace Bomb_Roulette.Core
 
         public void NextTurn() // 次のターンにする関数
         {
-            //-------後に導火線を決定したタイミングで実行するように変更する--------------------
-            // 現在のプレイヤーが爆発するかチェック
-            if (CheckForExplosion())
-            {
-                return; // 爆発したらゲーム終了するので、次のターンへ進まない
-            }
-            //--------------------------------------------------------------------------
-
             currentTurn = currentTurn + 1;
             if (currentTurn == numPlayers) // 全員のターンが終わったらラウンドを更新する
             {
