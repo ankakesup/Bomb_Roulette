@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 379186433944466695}
   - component: {fileID: 6696824554851147155}
   - component: {fileID: 1728014130184481863}
+  - component: {fileID: 1358649756753104063}
   m_Layer: 5
   m_Name: fusePrefab
   m_TagString: Untagged
@@ -76,3 +77,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1358649756753104063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687667137271121073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b9b8adbff40384887ada489962e8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

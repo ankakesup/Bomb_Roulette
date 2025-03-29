@@ -39,14 +39,14 @@ namespace Bomb_Roulette.Core
             {
                 ActivateSuddenDeath();
                 int numPlayers = TurnManager.Instance.GetNumPlayers();
-                Fuse.Instance.GenerateFuses(numPlayers + 1);
+                FuseManager.Instance.GenerateFuses(numPlayers + 1);
             }
             else
             {
                 // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
 
                 int numPlayers = TurnManager.Instance.GetNumPlayers();
-                Fuse.Instance.GenerateFuses(numPlayers + 1);
+                FuseManager.Instance.GenerateFuses(numPlayers + 1);
             }
             Debug.Log("Round: " + currentRound); // デバッグログの出力
         }
