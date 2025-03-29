@@ -11,6 +11,7 @@ namespace Bomb_Roulette.UI
         public static GameUI Instance;
         public TextMeshProUGUI turnDisplayText;
         public TextMeshProUGUI timerText;
+        public TextMeshProUGUI roundDisplayText;
         public Button operationsButton;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
         public Button TempButton;
@@ -29,7 +30,30 @@ namespace Bomb_Roulette.UI
                 return;
             }
             UpdateTurnDisplay(1);
+            UpdateRoundDisplay(1);
             Debug.Log("Game Start");
+        }
+
+        // UI のラウンド表示を更新
+        public void UpdateRoundDisplay(int currentRound)
+        {
+            roundDisplayText.text = "Round: " + currentRound;
+
+            /*
+            サドンデス時に表記を変えたい場合↓
+
+            bool isSuddenDeath = RoundManager.Instance.IsSuddenDeath();
+            
+            if (isSuddenDeath)
+            {
+                roundDisplayText.text = "Round: " + currentRound;
+            }
+            else
+            {
+                roundDisplayText.text = "Sudden Death Round";
+            }
+
+            */
         }
 
         public void UpdateTurnDisplay(int numPlayer)

@@ -1,6 +1,7 @@
 // Assets/Scripts/Core/RoundManager.cs
 using UnityEngine;
 using Bomb_Roulette.Models;
+using Bomb_Roulette.UI;
 
 namespace Bomb_Roulette.Core
 {
@@ -34,21 +35,21 @@ namespace Bomb_Roulette.Core
         public void NextRound() // 次のラウンドにする関数
         {
             currentRound++;
-            
+
+            int numPlayers = TurnManager.Instance.GetNumPlayers();
+
             if (currentRound > maxInitialRounds) // 4ラウンド目に入ったら，サドンデスにする
             {
                 ActivateSuddenDeath();
-                int numPlayers = TurnManager.Instance.GetNumPlayers();
-                FuseManager.Instance.GenerateFuses(numPlayers + 1);
+                FuseManager.Instance.GenerateFuses(numPlayers);
             }
             else
             {
                 // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
-
-                int numPlayers = TurnManager.Instance.GetNumPlayers();
                 FuseManager.Instance.GenerateFuses(numPlayers + 1);
             }
             Debug.Log("Round: " + currentRound); // デバッグログの出力
+            UpdateRoundUI();
         }
 
         void ActivateSuddenDeath()
@@ -62,5 +63,15 @@ namespace Bomb_Roulette.Core
         {
             return isSuddenDeath;
         }
+
+        // UI のラウンド表示を更新
+        private void UpdateRoundUI()
+        {
+            if (GameUI.Instance != null)
+            {
+                GameUI.Instance.UpdateRoundDisplay(currentRound);
+            }
+
+        }    
     }
 }

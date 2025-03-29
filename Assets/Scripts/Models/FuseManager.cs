@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Bomb_Roulette.Core;
 
 namespace Bomb_Roulette.Models
 {
@@ -78,6 +79,11 @@ namespace Bomb_Roulette.Models
         {
             Debug.Log($"Fuse clicked at index {index}. Removing...");
             RemoveFuse(index);
+
+            if (!TurnManager.Instance.CheckForExplosion())
+            {
+                TurnManager.Instance.NextTurn();
+            }
         }
 
         /// <summary>
