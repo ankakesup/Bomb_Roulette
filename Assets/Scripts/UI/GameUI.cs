@@ -37,10 +37,6 @@ namespace Bomb_Roulette.UI
         // UI のラウンド表示を更新
         public void UpdateRoundDisplay(int currentRound)
         {
-            roundDisplayText.text = "Round: " + currentRound;
-
-            /*
-            サドンデス時に表記を変えたい場合↓
 
             bool isSuddenDeath = RoundManager.Instance.IsSuddenDeath();
             
@@ -50,10 +46,9 @@ namespace Bomb_Roulette.UI
             }
             else
             {
-                roundDisplayText.text = "Sudden Death Round";
+                roundDisplayText.text = "Final Round";
             }
 
-            */
         }
 
         public void UpdateTurnDisplay(int numPlayer)

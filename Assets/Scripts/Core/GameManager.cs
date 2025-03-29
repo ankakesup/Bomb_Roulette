@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Bomb_Roulette.Models;
+using Bomb_Roulette.Audio;
 
 
 namespace Bomb_Roulette.Core
@@ -27,12 +28,15 @@ namespace Bomb_Roulette.Core
         {
             // 初期シーンとしてタイトル画面をロード
             LoadTitleScene();
+
         }
 
         public void LoadTitleScene()
         {
             // タイトル画面の呼び出し
             SceneManager.LoadScene("TitleScene");
+
+            AudioManager.Instance.PlayBGM(0);
         }
 
         public void StartGame()
