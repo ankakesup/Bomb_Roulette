@@ -3,6 +3,7 @@ using UnityEngine;
 using Bomb_Roulette.Effects;
 using UnityEngine.UI;
 using System.Collections;
+using Bomb_Roulette.Audio;
 
 namespace Bomb_Roulette.Models
 {
@@ -70,6 +71,9 @@ namespace Bomb_Roulette.Models
 
             // 本物の爆発画像に変更
             bombImage.sprite = realExplosionSprite;
+
+            // 爆発音を出す
+            AudioManager.Instance.PlaySFX(0);
 
             // フェイク爆発を一定時間表示
             yield return new WaitForSeconds(0.5f); // 0.5秒間待機

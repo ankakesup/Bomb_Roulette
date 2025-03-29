@@ -31,7 +31,7 @@ namespace Bomb_Roulette.UI
             }
             UpdateTurnDisplay(1);
             UpdateRoundDisplay(1);
-            Debug.Log("Game Start");
+            operationsPanel.SetActive(false);
         }
 
         // UI のラウンド表示を更新
