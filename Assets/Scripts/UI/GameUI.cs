@@ -42,11 +42,11 @@ namespace Bomb_Roulette.UI
             
             if (isSuddenDeath)
             {
-                roundDisplayText.text = "Round: " + currentRound;
+                roundDisplayText.text = "Final Round";
             }
             else
             {
-                roundDisplayText.text = "Final Round";
+                roundDisplayText.text = "Round: " + currentRound;
             }
 
         }
