@@ -21,7 +21,7 @@ namespace Bomb_Roulette.UI
         void ShowResult()
         {
             int explodedPlayer = TurnManager.Instance.GetExplodedPlayer();
-            resultText.text = "Player " + (explodedPlayer + 1) + " exploded!";
+            resultText.text = "Player " + (explodedPlayer + 1) ;
         }
 
         public void OnRestartButtonClicked()
