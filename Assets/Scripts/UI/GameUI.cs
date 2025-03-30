@@ -10,12 +10,9 @@ namespace Bomb_Roulette.UI
     {
         public static GameUI Instance;
         public TextMeshProUGUI turnDisplayText;
-        public TextMeshProUGUI timerText;
         public TextMeshProUGUI roundDisplayText;
         public Button operationsButton;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
-        public Button TempButton;
-        public Button TempButtonTurn;
 
 
         private void Awake()
@@ -63,33 +60,9 @@ namespace Bomb_Roulette.UI
             }
         }
 
-        public void UpdateTimerDisplay(float timeRemaining)
-        {
-            timerText.text = "TimeLimit: " + timeRemaining.ToString("F1");
-        }
-
         public void OnOperationsButtonClicked()
         {
             operationsPanel.SetActive(!operationsPanel.activeSelf);
         }
-        
-
-        public void TempButtonClicked() // デバッグ用のrerult画面起動用関数
-        {
-            GameManager.Instance.EndGame();
-        }
-
-        public void TempButtonTurnClicked()
-        {
-            if (TurnManager.Instance != null)
-            {
-                TurnManager.Instance.NextTurn();
-            }
-            else
-            {
-                Debug.LogError("TurnManager のインスタンスが見つかりません。シーンに配置されているか確認してください。");
-            }
-        }
-
     }
 }

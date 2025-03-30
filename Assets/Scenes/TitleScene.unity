@@ -2105,7 +2105,7 @@ GameObject:
   - component: {fileID: 1725983783}
   - component: {fileID: 1725983782}
   - component: {fileID: 1725983781}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: OperationPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
