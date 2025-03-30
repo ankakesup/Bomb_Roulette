@@ -56,6 +56,7 @@ namespace Bomb_Roulette.Core
             if (isSuddenDeath)
             {
                 explosionProbability = 1f / (numPlayers - currentTurn);
+                fakeExplosionProbability = 1f;
             }
             else
             {

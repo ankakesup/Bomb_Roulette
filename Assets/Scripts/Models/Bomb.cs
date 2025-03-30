@@ -84,7 +84,7 @@ namespace Bomb_Roulette.Models
         private IEnumerator ScaleUpBomb(float duration)
         {
             Vector3 originalScale = bombRectTransform.localScale; // 元のサイズ
-            Vector3 targetScale = originalScale * 5f; // 目標のサイズ（2倍）
+            Vector3 targetScale = originalScale * 4f; // 目標のサイズ（2倍）
 
             float elapsedTime = 0f;
 
@@ -103,7 +103,7 @@ namespace Bomb_Roulette.Models
         private IEnumerator ScaleDownBomb(float duration)
         {
             Vector3 originalScale = bombRectTransform.localScale; // 現在のサイズ
-            Vector3 targetScale = originalScale / 5f; // 元のサイズに戻す（2倍に拡大したため、半分に戻す）
+            Vector3 targetScale = originalScale / 4f; // 元のサイズに戻す（2倍に拡大したため、半分に戻す）
 
             float elapsedTime = 0f;
 
