@@ -8,8 +8,8 @@ namespace Bomb_Roulette.UI
     public class TitleScreenUI : MonoBehaviour
     {
         public Dropdown playerCountDropdown;
-        public Button startButton;
         public Button operationsButton;
+        public Button operationsButton2;
         public GameObject operationsPanel;
         public GameObject ScreenClickListener;
 

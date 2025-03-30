@@ -12,6 +12,7 @@ namespace Bomb_Roulette.UI
         public TextMeshProUGUI turnDisplayText;
         public TextMeshProUGUI roundDisplayText;
         public Button operationsButton;
+        public Button operationsButton2;
         public GameObject operationsPanel; // 操作説明パネル（常時表示可能）
 
 
