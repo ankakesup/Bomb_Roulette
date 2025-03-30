@@ -1,7 +1,6 @@
-// Assets/Scripts/UI/TitleScreenUI.cs
-
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Bomb_Roulette.Core;
 
 namespace Bomb_Roulette.UI
@@ -12,31 +11,38 @@ namespace Bomb_Roulette.UI
         public Button startButton;
         public Button operationsButton;
         public GameObject operationsPanel;
+        public GameObject ScreenClickListener;
 
         void Start()
         {
-            startButton.onClick.AddListener(OnStartButtonClicked);
             operationsButton.onClick.AddListener(OnOperationsButtonClicked);
             operationsPanel.SetActive(false);
-        }
 
-        void OnStartButtonClicked()
-        {
-            if (TurnManager.Instance != null)
+            // ScreenClickListener にクリックイベントを追加する処理
+            EventTrigger trigger = ScreenClickListener.GetComponent<EventTrigger>();
+            if (trigger == null)
             {
-                TurnManager.Instance.SetNumPlayers(playerCountDropdown.value + 2);
+                trigger = ScreenClickListener.AddComponent<EventTrigger>();
             }
-            else
+            // PointerClick イベントのエントリを作成
+            EventTrigger.Entry entry = new EventTrigger.Entry
             {
-                Debug.LogError("TurnManager のインスタンスが見つかりません。シーンに配置されていることを確認してください。");
-            }
-
-            GameManager.Instance.StartGame();
+                eventID = EventTriggerType.PointerClick
+            };
+            entry.callback.AddListener((data) => { OnGameObjectClicked(); });
+            trigger.triggers.Add(entry);
         }
 
         public void OnOperationsButtonClicked()
         {
             operationsPanel.SetActive(!operationsPanel.activeSelf);
+        }
+
+        // クリックイベント時に呼ばれるメソッド
+        void OnGameObjectClicked()
+        {
+            TurnManager.Instance.SetNumPlayers(playerCountDropdown.value + 2);
+            GameManager.Instance.StartGame();
         }
     }
 }
