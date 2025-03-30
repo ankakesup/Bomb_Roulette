@@ -2108,7 +2108,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.85
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2207,7 +2207,7 @@ MonoBehaviour:
   bgmSource: {fileID: 1905168545}
   sfxSource: {fileID: 1905168544}
   bgmClips:
-  - {fileID: 8300000, guid: f70476facde6276448e506d9e2afd4cf, type: 3}
+  - {fileID: 8300000, guid: c9cf45b8cb8f57d4ba31e7a431a88dca, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 6755e94e6e027464c934b9ca9b1c10ff, type: 3}
   - {fileID: 8300000, guid: 2b5bd6c3991893a42ba283bc21cf89de, type: 3}
