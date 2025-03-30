@@ -2,6 +2,7 @@
 using UnityEngine;
 using Bomb_Roulette.Models;
 using Bomb_Roulette.UI;
+using System.Collections;
 
 namespace Bomb_Roulette.Core
 {
@@ -41,16 +42,29 @@ namespace Bomb_Roulette.Core
             if (currentRound > maxInitialRounds) // 4ラウンド目に入ったら，サドンデスにする
             {
                 ActivateSuddenDeath();
-                FuseManager.Instance.GenerateFuses(numPlayers);
             }
-            else
-            {
-                // 通常ラウンド用の処理を書いてほしい（例：導火線本数の更新など）
-                FuseManager.Instance.GenerateFuses(numPlayers + 1);
-            }
+
+            // 導火線を削除してから新しい導火線を生成
+            StartCoroutine(GenerateFusesAfterDelay(numPlayers));
+
             Debug.Log("Round: " + currentRound); // デバッグログの出力
             UpdateRoundUI();
         }
+
+        private IEnumerator GenerateFusesAfterDelay(int numFuses)
+        {
+            yield return new WaitForSeconds(0.5f); // 0.5秒待機（削除が完了するのを待つ）
+
+            if (isSuddenDeath)
+            {
+                FuseManager.Instance.GenerateFuses(numFuses); // サドンデスでは通常の本数
+            }
+            else
+            {
+                FuseManager.Instance.GenerateFuses(numFuses + 1); // 通常ラウンドでは+1本
+            }
+        }
+
 
         void ActivateSuddenDeath()
         {
