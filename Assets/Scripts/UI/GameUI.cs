@@ -53,7 +53,7 @@ namespace Bomb_Roulette.UI
         {
             if (turnDisplayText != null)
             {
-                turnDisplayText.text = "Turn: Player" + numPlayer;
+                turnDisplayText.text = "Player" + numPlayer;
             }
             else
             {
