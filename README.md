@@ -68,40 +68,52 @@
 
 ## 📦 ディレクトリ構成
 
+作っただけで使っていないC#クラス(ファイル)クラスがいくつかあるので，それはそのうち消します。
+
 ```
 Bomb_Roulette/
 ├── Assets/
+│   ├── Audio/
+│   │   ├── Prehabs/
 │   ├── Scenes/
-│   │   ├── Title.unity
-│   │   ├── Game.unity
-│   │   └── SuddenDeath.unity
+│   │   ├── GameScene.unity
+│   │   ├── ResultScene.unity
+│   │   └── TitleScene.unity
 │   ├── Scripts/
-│   │   ├── BombController.cs
-│   │   ├── GameManager.cs
-│   │   └── UIManager.cs
+│   │   ├── Audio/
+│   │   │   └── AudioManager.cs
+│   │   ├── Config/
+│   │   │   └── GameConfig.cs
+│   │   ├── Core/
+│   │   │   ├── DataManager.cs
+│   │   │   ├── GameManager.cs
+│   │   │   ├── PlayerManager.cs
+│   │   │   ├── RoundManager.cs
+│   │   │   └── TurnManager.cs
+│   │   ├── Effects/
+│   │   │   ├── ExplosionEffect.cs
+│   │   │   ├── FakeExplosionEffect.cs
+│   │   │   └── FuseEffect.cs
+│   │   ├── Models/
+│   │   │   ├── Bomb.cs
+│   │   │   ├── FuseItem.cs
+│   │   │   ├── FuseManager.cs
+│   │   │   └── Player.cs
+│   │   ├── UI/
+│   │   │   ├── GameUI.cs
+│   │   │   ├── ResultScreenUI.cs
+│   │   │   └── TitleScreenUI.cs
+│   │   └── Utilities/
+│   │   │   └── Timer.cs
 │   ├── Prefabs/
 │   └── Videos/
-├── ProjectSettings/
+├── Packages
+├── ProjectSettings
 └── README.md
 ```
 
 ---
 
-## 🤝 貢献について
-
-1. Issue を立ててください  
-2. フォーク → ブランチ作成 (`feature/xxx`)  
-3. Pull Request を送ってください  
-
----
-
-## 📝 ライセンス
-
-MIT License © 情技研
-
----
-
 ## 📬 お問い合わせ
 
-- Slack／Discord で “情技研” チャンネルへ  
-- Email: team.jougiken@example.com  
+- Email: ankakesup@gmail.com 
